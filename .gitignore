@@ -1,1 +1,6 @@
-/*.aux
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*~
