@@ -1,0 +1,2 @@
+<$publications>
+<$pubType/><$fields.Title/><$authors.name.@componentsJoinedByCommaAndAnd/><$dateAdded.description/><$fields.Volume/><$fields.Number/><$fields.Pages/><$remoteURLs.URL.absoluteString.@firstObject/><$remoteURLs.URL.absoluteString.@firstObject/></$publications>
