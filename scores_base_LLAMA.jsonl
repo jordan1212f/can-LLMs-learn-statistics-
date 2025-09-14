@@ -1,0 +1,1 @@
+{"question_id": "os_5.15a", "model": "base", "category": "Hypothesis Formulation", "error": "judge_failed: TypeError: expected string or bytes-like object, got 'dict'", "subscores": null, "score_raw": null, "deductions_applied": [], "score_final": null, "rationale": null}

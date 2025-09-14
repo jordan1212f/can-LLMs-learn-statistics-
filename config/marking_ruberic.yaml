@@ -1,0 +1,315 @@
+version: 1.0
+title: Marking Rubric for Statistics Questions
+description: The criteria used for marking each category of questions
+scoring:
+  weights: { correctness: 6.0, completeness: 3.0, clarity: 1.0 }
+  deductions:
+    uses_sample_stat_in_hypotheses: 3        #p̂/x̄ in null/alt hpyothesis
+    null_missing_equality: 2                 #H0 must have some kind of equality sign
+    wrong_tail_vs_wording: 2
+    wrong_test_selection: 2                  #picking the wrong test 
+    ci_ht_mismatch: 3                        #decision contradicts confidence interval for same alpha
+    pvalue_is_prob_H0_true: 3                #statement : “probability H0 is true”
+    wrong_CI_interpretation: 2               #“prob the parameter is in interval”, etc.
+    arithmetic_error_major: 2
+    arithmetic_error_minor: 1
+  caps:
+    deduction_cap_fraction: 0.40            
+    per_deduction_max: 3
+    
+deduction_applicability_codes: #initially i had alot of problems with wrong deductions being applied when not needing to thus i i had to strictly enforce rules for which deductions apply 
+  uses_sample_stat_in_hypotheses:
+    - Hypothesis Formulation
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Full Test Procedure (Reasoning)
+    - Experiment Design
+    - Conceptual Errors
+
+  null_missing_equality:
+    - Hypothesis Formulation
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Full Test Procedure (Reasoning)
+    - Experiment Design
+    - Conceptual Errors
+
+  wrong_tail_vs_wording:
+    - Hypothesis Formulation
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Full Test Procedure (Reasoning)
+    - Interpretation (CI to Hypothesis)
+    - Interpretation of p-value
+    - Experiment Design
+
+  wrong_test_selection:
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Full Test Procedure (Reasoning)
+    - Experiment Design
+    - Conceptual Errors
+
+  ci_ht_mismatch:
+    - Interpretation (CI to Hypothesis)
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Experiment Design
+
+  pvalue_is_prob_H0_true:
+    - Interpretation of p-value
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Conceptual Errors
+    - Conceptual Application
+
+  wrong_CI_interpretation:
+    - Interpretation of confidence interval
+    - Interpretation (CI to Hypothesis)
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Conceptual Errors
+
+  arithmetic_error_major:
+    - Checking Conditions
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Full Test Procedure (Reasoning)
+    - Interpretation (CI to Hypothesis)
+    - Interpretation of confidence interval
+    - Experiment Design
+
+  arithmetic_error_minor:
+    - Checking Conditions
+    - Full Test Procedure
+    - Full Test Procedure (Two-sample)
+    - Full Test Procedure (Reasoning)
+    - Interpretation (CI to Hypothesis)
+    - Interpretation of confidence interval
+    - Experiment Design
+
+deduction_definitions:
+  uses_sample_stat_in_hypotheses:
+    desc: "H0/Ha uses a sample statistic (p̂, x̄) instead of a population parameter (p, μ)."
+    Bad instance: ["H0: p̂ = 0.5", "Ha: x̄ > 12"]
+    Ok instance:  ["H0: p = 0.5", "Ha: μ > 12"]
+
+  null_missing_equality:
+    desc: "H0 lacks an equality sign (should use =, ≤, or ≥)."
+    Bad instance: ["H0: p < 0.5", "H0: μ > 10"]
+    Ok instance:  ["H0: p = 0.5", "H0: μ ≥ 10"]
+
+  wrong_tail_vs_wording:
+    desc: "Tail contradicts wording within the question: 'different' ⇒ two-sided; 'higher/lower' ⇒ one-sided in correct direction."
+
+  wrong_test_selection:
+    desc: "Selected test family is inappropriate given the context of the question (e.g., t vs z; pooled vs unpooled; 1-prop vs 2-prop)."
+
+  ci_ht_mismatch:
+    desc: "Decision contradicts CI at the same α (e.g., null value lies inside CI but they 'reject', or outside but they 'do not reject')."
+
+  pvalue_is_prob_H0_true:
+    desc: "States/impllies the p-value is the probability that H0 is true."
+
+  wrong_CI_interpretation:
+    desc: "Treats CI as probability the parameter lies in the interval; misuses frequentist meaning."
+
+  arithmetic_error_major:
+    desc: "Large numeric mistake that changes the conclusion or violates the check (e.g., np miscomputed so condition flips)."
+
+  arithmetic_error_minor:
+    desc: "Small arithmetic or formatting slip that doesn’t change the decision (e.g., 0.53 vs 0.532)."
+
+Categories:
+
+  Hypothesis Formulation:
+    checklist:
+      correctness:
+        - "Uses population parameters (p or μ(mu)), not sample statistics (p̂(phat), x̄(xbar))."
+        - "H0 includes an equality; Ha is the complementary statement with correct direction."
+        - "Words and symbols are consistent (same value and tail)."
+        - "Tail matches wording: 'different' ⇒ two-sided; 'higher/lower' ⇒ one-sided."
+      completeness:
+        - "Provides H0 and Ha in words."
+        - "Provides H0 and Ha in symbols."
+        - "States notation and values explicitly (e.g., p = 0.50)."
+      clarity:
+        - "Unambiguous, succinct statements."
+
+  Checking Conditions:
+    checklist:
+      correctness:
+        - "States independence and the distributional condition (success–failure / normality as appropriate)."
+        - "Uses the correct quantity for checks (p0 for tests; p̂(phat) for Confidence Intervals unless told otherwise)."
+        - "Computes numeric checks correctly (e.g., np ≥ 10, n(1−p) ≥ 10)."
+        - "Gives the correct met / not-met conclusion."
+        - "Success–failure for confidence interval: use observed counts (x and n−x); for tests: use p₀."
+      completeness:
+        - "Mentions both independence and distributional checks."
+        - "Shows the relevant numbers used in the checks."
+        - "States a final conclusion."
+      clarity:
+        - "Clear, stepwise justification."
+
+  Interpretation of p-value:
+    checklist:
+      correctness:
+        - "Defines the p-value as the probability of data as extreme or more extreme than observed, assuming H0 is true."
+        - "Applies that definition to the problem’s context."
+        - "Avoids saying it is the 'probability H0 is true.'"
+      completeness:
+        - "Provides a general definition and a context-specific explanation."
+        - "States directionality (one-/two-sided) if relevant."
+        - "Mentions the α(alpha) decision rule if asked."
+      clarity:
+        - "Concise and accurate."
+
+  Interpretation (CI to Hypothesis):
+    checklist:
+      correctness:
+        - "Identifies the null/claimed value or threshold being tested (e.g., 0.50 for 'majority')."
+        - "Checks whether the null value lies inside/outside the Confidence Interval using logic matched to the same α(alpha)."
+        - "Notes boundary convention: for two-sided tests, if the null equals a Confidence Interval bound, treat as not rejected."
+        - "Tail/direction is consistent when relevant; conclusion stated in context."
+      completeness:
+        - "Includes a Confidence Interval based decision and the reasoning."
+        - "Mentions the α(alpha) ↔ Confidence Interval linkage when implied (two-sided test at α(alpha) ↔ (1−α(alpha)) Confidence Interval)."
+        - "Briefly restates the practical implication."
+      clarity:
+        - "Plain-language explanation."
+
+  Interpretation of confidence interval:
+    checklist:
+      correctness:
+        - "States the confidence level (e.g., 95%)."
+        - "Defines the parameter in population terms and in context."
+        - "Reports the interval correctly."
+        - "Gives the correct frequentist interpretation (Confidence across repetitions that true parameter would be captured within the interval,
+          not 'the probability the parameter is in the interval')"
+      completeness:
+        - "Includes level, parameter, and bounds."
+        - "Mentions assumptions/scope limits if relevant."
+        - "Short contextualisation of what the Confidence interval means for the particular question + scenario."
+      clarity:
+        - "No misuse of probability language."
+
+  Practical vs. Statistical Significance:
+    checklist:
+      correctness:
+        - "Distinguishes statistical significance from practical (material) significance."
+        - "Assesses effect size/materiality for the scenario."
+        - "Notes costs/benefits or impact trade-offs."
+        - "Recognises that large n can make trivial effects statistically 'significant.'"
+      completeness:
+        - "Provides definition, application, and takeaway."
+        - "Mentions caveats (power, sample size) when relevant."
+        - "Offers a contextual recommendation."
+      clarity:
+        - "Business/real-world framing if relevant to the question and is easy to follow."
+
+  Conceptual Errors:
+    checklist:
+      correctness:
+        - "Identifies each specific error relevant to the question / scenario"
+        - "States the correct underlying statistical principle for each error."
+        - "Proposes a correct formulation where appropriate."
+        - "Does not introduce new, unrelated errors."
+      completeness:
+        - "Covers all fundamental errors present."
+        - "Each error includes a brief justification or explanation for why it's an error."
+        - "Includes corrected versions if the prompt asks."
+      clarity:
+        - "Separated bullets; precise wording."
+
+  Conceptual Application:
+    checklist:
+      correctness:
+        - "Chooses the correct concept (e.g., Type I vs. Type II, α(alpha) trade-offs)."
+        - "Applies it correctly to the scenario/context."
+        - "Gets trade-off direction right (lower ↓α(alpha)⇒ ↓ lowers chance of Type I but potentially ↑ increases chance of Type II)."
+        - "No contradictions."
+      completeness:
+        - "Definition + application to context + implication."
+        - "States a decision/recommendation if asked."
+        - "Mentions uncertainty or limitations if relevant."
+      clarity:
+        - "Clear plan language explanation which can link back to the original scenario."
+
+  Full Test Procedure:
+    checklist:
+      correctness:
+        - "States correct H0/Ha."
+        - "Includes appropriate conditions and checks."
+        - "Selects the correct test (z-test / t-test) and degrees of freedom if t-test."
+        - "Computes Standard Error / test statistic correctly and uses correct p-value logic."
+        - "Decision at the stated α(alpha); Confidence Interval (if provided) is consistent with the decision."
+      completeness:
+        - "All steps present and justified: H0/Ha → checks assumptions → selects correct test choice 
+          → computes test statistic → p-value → decision → contextual conclusion."
+        - "Shows formulas with numeric substitution when required."
+        - "States a Confidence interval if asked."
+      clarity:
+        - "Readable, stepwise structure."
+
+  Full Test Procedure (Two-sample):
+    checklist:
+      correctness:
+        - "Frames the difference correctly (μ(mu)1−μ(mu)2 or p1−p2) with direction matching the claim."
+        - "States assumptions (independence; equal/unequal variances or known σ(sigma)) as appropriate."
+        - "Uses the correct test (pooled/unpooled two-sample t, or two-sample z when σ(sigma) known)."
+        - "Computes test statistic/degrees of freedom/p-value correctly; Confidence Interval matches the decision."
+      completeness:
+        - "All steps present and justified."
+        - "Provides variance-equality rationale when pooling is considered."
+        - "Gives a contextual conclusion."
+      clarity:
+        - "Clear organisation."
+
+  Full Test Procedure (Reasoning):
+    checklist:
+      correctness:
+        - "Outlines the correct logical sequence tailored to the scenario."
+        - "Chooses an appropriate test and links α(alpha) to a Confidence Interval rule when relevant."
+        - "Notes key numeric checks conceptually (what would be verified)."
+      completeness:
+        - "Plan covers all steps needed to reach a decision for this particular context."
+        - "Mentions assumptions/conditions to be checked."
+        - "Explains what the outcome would mean in context."
+      clarity:
+        - "Coherent, scenario relevant plan (not just a generic list of procedures for any statistical experiment design)."
+  
+  Experiment Design:
+    checklist:
+      correctness:
+        - "States a clear research question naming the population, variables, and direction of effect (if any)."
+        - "Specifies an appropriate design with a comparison group (control vs treatment) and random assignment (or justifies an observational design)."
+        - "Identifies the independent (manipulated/treatment) and dependent (outcome/metric) variables correctly."
+        - "Defines how the outcome will be measured/scored (units, timing/window, instrument) so it’s reproducible."
+        - "Formulates H0/Ha on population parameters (μ(mu) or p); for group comparisons uses μ(mu)_treat−μ(mu)_ctrl (or p_t−p_c) with correct tail."
+        - "Proposes a suitable analysis plan (e.g., two-sample t for means; two-proportion z for proportions) and mentions key assumptions."
+        - "Links a confidence-interval decision rule to the hypothesis (e.g., Confidence Interval for μ(mu)_t−μ(mu)_c entirely > 0 ⇒ evidence of improvement)."
+      completeness:
+        - "Covers sampling/assignment method, intended sample sizes (N per group), and any blinding/standardisation steps."
+        - "Names potential confounders and how they’re controlled and accounted for."
+        - "Mentions assumptions/condition checks (independence; normality/CLT; equal variances if pooling) and chosen α(alpha) or Confidence Interval level."
+        - "States what will count as evidence (e.g., reject H0 at α(alpha)=0.05; 95% Confidence Interval excludes 0 in the positive direction)."
+      clarity:
+        - "Stepwise, implementable plan (bullet points or numbered steps for clarity); concise, unambiguous wording, always links decisions 
+          back to the question context"
+
+
+
+
+aliases:
+  "Checking Conditions": "Checking Conditions" 
+  "Conceptual Application": "Conceptual Application"
+  "Conceptual Errors": "Conceptual Errors"
+  "Experiment Design": "Experiment Design"
+  "Full Test Procedure": "Full Test Procedure"
+  "Full Test Procedure (Reasoning)": "Full Test Procedure (Reasoning)"
+  "Full Test Procedure (Two-sample)": "Full Test Procedure (Two-sample)"
+  "Hypothesis Formulation": "Hypothesis Formulation"
+  "Interpretation (CI to Hypothesis)": "Interpretation (CI to Hypothesis)"
+  "Interpretation of confidence interval": "Interpretation of confidence interval"
+  "Interpretation of p-value": "Interpretation of p-value"
+  "Practical vs. Statistical Significance": "Practical vs. Statistical Significance"
