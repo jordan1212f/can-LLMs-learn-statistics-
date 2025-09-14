@@ -1,12 +1,3 @@
-# Can LLMs Learn Statistics?
+This dissertation aims to answer to what extent large language models (LLMs) can learn statistics by testing whether they exhibit an ability to transfer reasoning from one domain (confidence intervals and statistical inference) to a related domain (hypothesis testing). We built a 45-item evaluation set from recent textbooks with worked solutions and a rubric focused marking scheme, we then compared three Mistral-7B–based systems: a Base model (no retrieval), a Confidence interval model grounded only in confidence interval materials, and a Hypothesis testing model grounded in domain related texts. Answers were scored by a human marker (primary judge) and a secondary LLM judge (Qwen-7B). We analysed differences using paired t-tests, Wilcoxon signed-rank tests, binomial sign tests, mean absolute error (MAE), Bland–Altman plots, Pearson/Spearman correlations, and Bradley–Terry rankings from pairwise wins.
 
-This project investigates how well large language models (LLMs) can learn statistical reasoning and transfer that knowledge across related domains. We focus on two core tasks—confidence intervals and hypothesis testing—and compare three training methods:
-
-2. **RAG (Retrieval-Augmented Generation)**  
-   Inject relevant textbook context at inference time.  
-3. **Hybrid (Fine-tuned + RAG)**  
-   Combine both approaches for explanation quality and contextual grounding.
-
-We evaluate open-source LLMs (e.g. LLaMA, DeepSeek, Mistral) on their ability to generalise step-by-step explanations, measure pedagogical clarity in line with Bloom’s 2-sigma problem, and ultimately assess their potential as AI tutors.
-
----
+Across the 45 matched items, no pairwise model comparison was statistically significant on t/Wilcoxon, and sign tests showed near-balanced win/loss counts. MAE and per category summaries indicate very small effect sizes, with the Hypothesis testing model consistently leading albiet by negilible margins, with confidence interval model performing comparably to the other systems despite being trained only on confidence-interval materials. This suggests at least partial transfer from CI knowledge to hypothesis-testing tasks. The LLM judge exhibited a consistent negative bias (harsher scoring) but moderate alignment with human rank order. Bradley–Terry rankings derived were stable for human scores and largely stable for Qwen. Robustness checks under three different deduction policies yielded near-identical win-rate matrices and only a single rank flip when models were effectively tied. We conclude that (i) CI-RAG showed credible cross domain generalisation, and (ii) Qwen-7B is useful for relative ordering, but its absolute score levels are not calibrated and should be interpreted with caution.
